@@ -32,6 +32,9 @@
             --bg: #050508;
             --glass: rgba(139, 92, 246, 0.12);
             --glow: 0 0 40px rgba(139, 92, 246, 0.4);
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
         }
 
         * {
@@ -48,6 +51,80 @@
             min-height: 100vh;
         }
 
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 5, 16, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .nav-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo span {
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #e5e5f0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 10px;
+        }
+
+        .nav-link:hover {
+            color: var(--main);
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .nav-link.active {
+            color: var(--main);
+            background: rgba(139, 92, 246, 0.15);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            cursor: pointer;
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: var(--glow);
+        }
+
         /* ===== MODAL ===== */
         .modal {
             position: fixed;
@@ -57,7 +134,7 @@
             display: none;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
+            z-index: 2000;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -69,7 +146,7 @@
 
         .modal-content {
             width: 90%;
-            max-width: 420px;
+            max-width: 480px;
             padding: 40px;
             border-radius: 26px;
             background: linear-gradient(180deg, rgba(139, 92, 246, 0.18), rgba(0, 0, 0, 0.6));
@@ -130,7 +207,7 @@
         }
 
         .modal-buttons button {
-            padding: 14px 28px;
+            padding: 12px 20px;
             border-radius: 14px;
             border: 1px solid var(--main);
             background: transparent;
@@ -138,7 +215,7 @@
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
-            min-width: 160px;
+            min-width: 60px;
         }
 
         .modal-buttons button:hover {
@@ -146,6 +223,188 @@
             color: #000;
             transform: translateY(-2px);
             box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+
+        /* ===== AUTH MODAL ===== */
+        .auth-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+            padding-bottom: 20px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 12px;
+            background: transparent;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            color: #fff;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .auth-tab.active {
+            background: var(--main);
+            color: #000;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .auth-form input {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 14px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .auth-form input:focus {
+            outline: none;
+            border-color: var(--main);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .auth-form button {
+            width: 100%;
+            padding: 14px;
+            border-radius: 14px;
+            background: var(--main);
+            border: none;
+            color: #000;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .auth-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+
+        /* ===== USER PROFILE MODAL ===== */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .profile-info h4 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: var(--main);
+        }
+
+        .profile-info p {
+            opacity: 0.8;
+            margin-bottom: 0;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-item {
+            background: rgba(139, 92, 246, 0.1);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--main);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .profile-orders {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .order-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .order-id {
+            color: var(--main);
+            font-weight: 600;
+        }
+
+        .order-date {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        .order-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+
+        .status-processing {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3B82F6;
+        }
+
+        .status-delivered {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
         }
 
         /* ===== CART ===== */
@@ -200,7 +459,7 @@
             display: none;
             align-items: center;
             justify-content: center;
-            z-index: 2000;
+            z-index: 3000;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -212,7 +471,7 @@
 
         .checkout-box {
             width: 90%;
-            max-width: 400px;
+            max-width: 500px;
             padding: 40px;
             border-radius: 26px;
             background: linear-gradient(180deg, rgba(139, 92, 246, 0.18), rgba(0, 0, 0, 0.7));
@@ -244,6 +503,7 @@
         .checkout-item {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             padding: 10px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -310,6 +570,7 @@
             height: 100vh;
             overflow: hidden;
             perspective: 1200px;
+            margin-top: 80px;
         }
 
         .hero-glow {
@@ -322,12 +583,9 @@
         }
 
         @keyframes floatGlow {
-
-            0%,
-            100% {
+            0%, 100% {
                 transform: translate(-50px, -30px);
             }
-
             50% {
                 transform: translate(50px, 30px);
             }
@@ -374,12 +632,9 @@
         }
 
         @keyframes float {
-
-            0%,
-            100% {
+            0%, 100% {
                 transform: translateY(0);
             }
-
             50% {
                 transform: translateY(-18px);
             }
@@ -443,18 +698,18 @@
             transform: translateY(0) scale(1);
         }
 
-        /* ===== CATALOG ===== */
+        /* ===== CATALOG WITH IMAGES ===== */
         .catalog {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
             perspective: 1200px;
             margin-top: 40px;
         }
 
         .card {
             position: relative;
-            height: 380px;
+            height: 420px;
             border-radius: 22px;
             background: linear-gradient(135deg,
                     rgba(139, 92, 246, 0.25),
@@ -462,7 +717,7 @@
             backdrop-filter: blur(20px);
             box-shadow: 0 0 60px rgba(139, 92, 246, 0.25);
             transform-style: preserve-3d;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
             overflow: hidden;
             will-change: transform;
             cursor: pointer;
@@ -478,45 +733,184 @@
                     transparent 60%);
             opacity: 0;
             transition: opacity 0.4s ease;
+            z-index: 1;
         }
 
         .card:hover {
             transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.35);
+            box-shadow: 0 20px 80px rgba(139, 92, 246, 0.4);
         }
 
         .card:hover::before {
             opacity: 1;
         }
 
-        .card-content {
+        .card-image {
+            position: relative;
+            height: 220px;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 22px 22px 0 0;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .card:hover .card-image img {
+            transform: scale(1.05);
+        }
+
+        .card-image-overlay {
             position: absolute;
             inset: 0;
+            background: linear-gradient(to bottom, transparent, rgba(5, 5, 16, 0.8));
+            z-index: 1;
+        }
+
+        .card-content {
+            position: relative;
             padding: 30px;
-            transform-style: preserve-3d;
+            height: calc(420px - 220px);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            z-index: 2;
         }
 
         .card h3 {
             color: var(--main);
             font-size: 1.4rem;
             margin-bottom: 10px;
-            transform: translateZ(40px);
         }
 
         .card p {
             font-size: 0.95rem;
             opacity: 0.85;
-            transform: translateZ(30px);
+            margin-bottom: 15px;
+            line-height: 1.5;
         }
 
         .price {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: #fff;
-            font-weight: 600;
+            font-weight: 700;
             text-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+        }
+
+        .product-tag {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--main);
+            color: #000;
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 3;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+        }
+
+        /* ===== PERSONAL CABINET ===== */
+        .personal-section {
+            min-height: 80vh;
+            padding-top: 120px;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .sidebar {
+            background: rgba(139, 92, 246, 0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 22px;
+            padding: 30px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .sidebar-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .menu-item {
+            padding: 15px 20px;
+            border-radius: 12px;
+            background: transparent;
+            border: none;
+            color: #fff;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .menu-item:hover {
+            background: rgba(139, 92, 246, 0.15);
+        }
+
+        .menu-item.active {
+            background: var(--main);
+            color: #000;
+        }
+
+        .dashboard-content {
+            background: rgba(139, 92, 246, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 22px;
+            padding: 40px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .orders-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .order-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .order-products {
+            margin-top: 20px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .order-product {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            background: rgba(139, 92, 246, 0.05);
+            border-radius: 10px;
+        }
+
+        .order-product img {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            object-fit: cover;
         }
 
         /* ===== ARTICLES ===== */
@@ -548,13 +942,13 @@
         }
 
         /* ===== UTILITIES ===== */
-        .empty-cart {
+        .empty-cart, .empty-orders, .empty-favorites {
             text-align: center;
-            padding: 30px;
+            padding: 40px;
             opacity: 0.7;
         }
 
-        .close-checkout {
+        .close-checkout, .close-modal {
             position: absolute;
             top: 20px;
             right: 20px;
@@ -567,32 +961,137 @@
             transition: opacity 0.3s ease;
         }
 
-        .close-checkout:hover {
+        .close-checkout:hover, .close-modal:hover {
             opacity: 1;
         }
 
-        @media (max-width: 768px) {
-            section {
-                padding: 80px 5%;
-            }
+        .logout-btn {
+            background: transparent;
+            border: 1px solid var(--error);
+            color: var(--error);
+            padding: 8px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            width: 100%;
+        }
 
+        .logout-btn:hover {
+            background: var(--error);
+            color: #000;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .nav-link {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+            
+            section {
+                padding: 100px 5%;
+            }
+            
             .glass {
                 padding: 30px;
             }
-
+            
             .modal-buttons {
                 flex-direction: column;
             }
-
+            
             .modal-buttons button {
                 min-width: auto;
                 width: 100%;
             }
-
+            
             .cart {
                 bottom: 20px;
                 right: 20px;
                 padding: 15px;
+            }
+            
+            .card {
+                height: 400px;
+            }
+            
+            .card-image {
+                height: 200px;
+            }
+            
+            .catalog {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* ===== MODAL IMAGE ===== */
+        .modal-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent, rgba(5, 5, 16, 0.3));
+        }
+
+        /* ===== NOTIFICATION ===== */
+        .notification {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            background: rgba(139, 92, 246, 0.9);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            animation: slideIn 1.3s ease, fadeOut 1.3s ease 2.7s forwards;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            font-weight: 500;
+            opacity: 0;
+        }
+
+        @keyframes slideIn {
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
             }
         }
     </style>
@@ -600,113 +1099,361 @@
 
 <body>
 
-    <div class="hero">
-        <div class="hero-glow"></div>
-        <div class="scene" id="scene"></div>
-
-        <div class="logo-container">
-            <div class="logo" id="logo"></div>
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <a href="#" class="nav-logo">OBRIXION <span>FUTURE</span></a>
+        <div class="nav-links">
+            <a href="#home" class="nav-link active">Главная</a>
+            <a href="#catalog" class="nav-link">Каталог</a>
+            <a href="#personal" class="nav-link personal-link">Личный кабинет</a>
+            <div class="user-avatar" id="userAvatar">
+                ?
+            </div>
         </div>
-    </div>
+    </nav>
 
-    <section>
-        <div class="glass">
-            <h2>О магазине одежды OBRIXION</h2>
-            <p>
-                OBRIXION — это не просто одежда. Это система сигналов, эмоций и внутреннего состояния.
-                Мы создаём стиль как форму диалога между человеком и пространством будущего.
-                Каждая линия, текстура и форма — отражение психологии, уверенности и глубины личности.
-            </p>
+    <!-- MAIN CONTENT -->
+    <div id="home">
+        <div class="hero">
+            <div class="hero-glow"></div>
+            <div class="scene" id="scene"></div>
+
+            <div class="logo-container">
+                <div class="logo" id="logo"></div>
+            </div>
         </div>
-    </section>
 
-    <section>
-        <div class="glass">
-            <h2>Психология стиля</h2>
-            <p>
-                Одежда влияет на восприятие сильнее слов. Цвет активирует эмоции,
-                форма задаёт ритм, а фактура формирует ощущение контроля.
-                Стиль OBRIXION построен на осознанности, минимализме и энергетике будущего.
-            </p>
+        <section>
+            <div class="glass">
+                <h2>О магазине одежды OBRIXION</h2>
+                <p>
+                    OBRIXION — это не просто одежда. Это система сигналов, эмоций и внутреннего состояния.
+                    Мы создаём стиль как форму диалога между человеком и пространством будущего.
+                    Каждая линия, текстура и форма — отражение психологии, уверенности и глубины личности.
+                </p>
+            </div>
+        </section>
 
-            <div class="reveal" style="margin-top: 60px;">
-                <h2>Каталог OBRIXION</h2>
-                <div class="catalog">
-                    <div class="card"
-                        data-features="Материал: Премиум хлопок|Посадка: Oversize|Цвет: Graphite Black|Производство: Limited Edition">
-                        <div class="card-content">
-                            <div>
-                                <h3>OBRIXION CORE</h3>
-                                <p>Минималистичный силуэт. Контроль. Влияние.</p>
+        <section id="catalog">
+            <div class="glass">
+                <h2>Психология стиля</h2>
+                <p>
+                    Одежда влияет на восприятие сильнее слов. Цвет активирует эмоции,
+                    форма задаёт ритм, а фактура формирует ощущение контроля.
+                    Стиль OBRIXION построен на осознанности, минимализме и энергетике будущего.
+                </p>
+                
+                <div class="reveal" style="margin-top: 60px;">
+                    <h2>Каталог OBRIXION</h2>
+                    <div class="catalog">
+                        <!-- CARD 1 -->
+                        <div class="card" 
+                             data-id="1"
+                             data-features="Материал: Премиум хлопок|Посадка: Oversize|Цвет: Graphite Black|Производство: Limited Edition"
+                             data-image="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                             data-tag="NEW">
+                            <div class="card-image">
+                                <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                     alt="OBRIXION CORE - Минималистичный стиль будущего" 
+                                     loading="lazy">
+                                <div class="card-image-overlay"></div>
                             </div>
-                            <div class="price">₽ 12 900</div>
+                            <div class="card-content">
+                                <div>
+                                    <h3>OBRIXION CORE</h3>
+                                    <p>Минималистичный силуэт. Контроль. Влияние.</p>
+                                </div>
+                                <div class="price">₽ 12 900</div>
+                            </div>
+                            <div class="product-tag">NEW</div>
                         </div>
-                    </div>
 
-                    <div class="card"
-                        data-features="Материал: Tech fabric|Эффект: Нейро-линии|Форма: Slim fit|Коллекция: Neuro Series">
-                        <div class="card-content">
-                            <div>
-                                <h3>NEURO LINE</h3>
-                                <p>Одежда как продолжение психологии.</p>
+                        <!-- CARD 2 -->
+                        <div class="card" 
+                             data-id="2"
+                             data-features="Материал: Tech fabric|Эффект: Нейро-линии|Форма: Slim fit|Коллекция: Neuro Series"
+                             data-image="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                             data-tag="TECH">
+                            <div class="card-image">
+                                <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                     alt="NEURO LINE - Технологичная одежда" 
+                                     loading="lazy">
+                                <div class="card-image-overlay"></div>
                             </div>
-                            <div class="price">₽ 14 500</div>
+                            <div class="card-content">
+                                <div>
+                                    <h3>NEURO LINE</h3>
+                                    <p>Одежда как продолжение психологии.</p>
+                                </div>
+                                <div class="price">₽ 14 500</div>
+                            </div>
+                            <div class="product-tag">TECH</div>
                         </div>
-                    </div>
 
-                    <div class="card"
-                        data-features="Материал: Soft shell|Стиль: Minimal void|Посадка: Relaxed|Ограниченный тираж: 100 шт">
-                        <div class="card-content">
-                            <div>
-                                <h3>VOID FORM</h3>
-                                <p>Чистая форма. Эмоциональный вакуум.</p>
+                        <!-- CARD 3 -->
+                        <div class="card" 
+                             data-id="3"
+                             data-features="Материал: Soft shell|Стиль: Minimal void|Посадка: Relaxed|Ограниченный тираж: 100 шт"
+                             data-image="https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                             data-tag="LIMITED">
+                            <div class="card-image">
+                                <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                     alt="VOID FORM - Эмоциональный вакуум" 
+                                     loading="lazy">
+                                <div class="card-image-overlay"></div>
                             </div>
-                            <div class="price">₽ 11 800</div>
+                            <div class="card-content">
+                                <div>
+                                    <h3>VOID FORM</h3>
+                                    <p>Чистая форма. Эмоциональный вакуум.</p>
+                                </div>
+                                <div class="price">₽ 11 800</div>
+                            </div>
+                            <div class="product-tag">LIMITED</div>
+                        </div>
+
+                        <!-- CARD 4 -->
+                        <div class="card" 
+                             data-id="4"
+                             data-features="Материал: Silver thread|Защита: Waterproof|Особенность: Smart temperature|Производство: Japan"
+                             data-image="https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                             data-tag="PRO">
+                            <div class="card-image">
+                                <img src="https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                     alt="QUANTUM SHIFT - Квантовый стиль" 
+                                     loading="lazy">
+                                <div class="card-image-overlay"></div>
+                            </div>
+                            <div class="card-content">
+                                <div>
+                                    <h3>QUANTUM SHIFT</h3>
+                                    <p>Квантовый скачок в стиле.</p>
+                                </div>
+                                <div class="price">₽ 16 200</div>
+                            </div>
+                            <div class="product-tag">PRO</div>
+                        </div>
+
+                        <!-- CARD 5 -->
+                        <div class="card" 
+                             data-id="5"
+                             data-features="Материал: Carbon fiber|Вес: 280г|Особенность: Anti-static|Коллекция: Future Series"
+                             data-image="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                             data-tag="CARBON">
+                            <div class="card-image">
+                                <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                     alt="CARBON EDGE - Углеродная коллекция" 
+                                     loading="lazy">
+                                <div class="card-image-overlay"></div>
+                            </div>
+                            <div class="card-content">
+                                <div>
+                                    <h3>CARBON EDGE</h3>
+                                    <p>Прочность углерода в стиле.</p>
+                                </div>
+                                <div class="price">₽ 15 400</div>
+                            </div>
+                            <div class="product-tag">CARBON</div>
+                        </div>
+
+                        <!-- CARD 6 -->
+                        <div class="card" 
+                             data-id="6"
+                             data-features="Материал: Moon fabric|Свет: Glow in dark|Эффект: Gradient|Ограничение: 50 шт"
+                             data-image="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                             data-tag="GLOW">
+                            <div class="card-image">
+                                <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                     alt="LUNAR PHASE - Лунная коллекция" 
+                                     loading="lazy">
+                                <div class="card-image-overlay"></div>
+                            </div>
+                            <div class="card-content">
+                                <div>
+                                    <h3>LUNAR PHASE</h3>
+                                    <p>Стиль под светом луны.</p>
+                                </div>
+                                <div class="price">₽ 13 700</div>
+                            </div>
+                            <div class="product-tag">GLOW</div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <p style="margin-top:40px;">
-                Ты не следуешь моде — ты формируешь состояние.
-                Запусти свой путь к пониманию себя.
-            </p>
-        </div>
-    </section>
+                <p style="margin-top:40px;">
+                    Ты не следуешь моде — ты формируешь состояние.
+                    Запусти свой путь к пониманию себя.
+                </p>
+            </div>
+        </section>
 
-    <section>
-        <h2>Последние статьи</h2>
-        <div class="articles">
-            <div class="article">
-                <h3>Эмоциональное влияние одежды</h3>
-                <p>Как геометрия и цвет влияют на восприятие человека в обществе.</p>
+        <section>
+            <h2>Последние статьи</h2>
+            <div class="articles">
+                <div class="article">
+                    <h3>Эмоциональное влияние одежды</h3>
+                    <p>Как геометрия и цвет влияют на восприятие человека в обществе.</p>
+                </div>
+                <div class="article">
+                    <h3>Будущее моды</h3>
+                    <p>Почему стиль становится инструментом психологии и самоконтроля.</p>
+                </div>
+                <div class="article">
+                    <h3>Глубина минимализма</h3>
+                    <p>Меньше деталей — больше смысла и силы.</p>
+                </div>
             </div>
-            <div class="article">
-                <h3>Будущее моды</h3>
-                <p>Почему стиль становится инструментом психологии и самоконтроля.</p>
-            </div>
-            <div class="article">
-                <h3>Глубина минимализма</h3>
-                <p>Меньше деталей — больше смысла и силы.</p>
+        </section>
+    </div>
+
+    <!-- PERSONAL CABINET SECTION (hidden by default) -->
+    <section id="personal" class="personal-section" style="display: none;">
+        <div class="glass">
+            <h2>Личный кабинет</h2>
+            <div class="dashboard">
+                <div class="sidebar">
+                    <div class="sidebar-menu">
+                        <button class="menu-item active" data-tab="orders">Мои заказы</button>
+                        <button class="menu-item" data-tab="profile">Профиль</button>
+                        <button class="menu-item" data-tab="favorites">Избранное</button>
+                        <button class="menu-item" data-tab="settings">Настройки</button>
+                        <button class="logout-btn" id="logoutBtn">Выйти</button>
+                    </div>
+                </div>
+                <div class="dashboard-content">
+                    <!-- Orders Tab -->
+                    <div class="content-section active" id="ordersTab">
+                        <h3>Мои заказы</h3>
+                        <div class="orders-grid" id="ordersList">
+                            <div class="empty-orders">У вас пока нет заказов</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Profile Tab -->
+                    <div class="content-section" id="profileTab">
+                        <h3>Мой профиль</h3>
+                        <div class="profile-stats">
+                            <div class="stat-item">
+                                <span class="stat-value" id="totalOrders">0</span>
+                                <span class="stat-label">Заказов</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value" id="totalSpent">0 ₽</span>
+                                <span class="stat-label">Потрачено</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value" id="memberSince">2024</span>
+                                <span class="stat-label">С нами с</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Favorites Tab -->
+                    <div class="content-section" id="favoritesTab">
+                        <h3>Избранное</h3>
+                        <div class="catalog" id="favoritesList">
+                            <div class="empty-favorites">В избранном пока пусто</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Settings Tab -->
+                    <div class="content-section" id="settingsTab">
+                        <h3>Настройки</h3>
+                        <div class="auth-form">
+                            <input type="text" placeholder="Имя" id="profileName">
+                            <input type="email" placeholder="Email" id="profileEmail">
+                            <input type="tel" placeholder="Телефон" id="profilePhone">
+                            <input type="text" placeholder="Адрес" id="profileAddress">
+                            <button id="saveProfile">Сохранить изменения</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <footer>
-        © OBRIXION — Стиль будущего
+        © OBRIXION — Стиль будущего Ft.Copilot 2347
     </footer>
 
-    <!-- MODAL -->
+    <!-- PRODUCT MODAL -->
     <div class="modal" id="modal">
+        <button class="close-modal" id="closeModalBtn">×</button>
         <div class="modal-content">
+            <div class="modal-image" id="modalImage">
+                <img id="modalImageSrc" src="" alt="">
+                <div class="modal-image-overlay"></div>
+            </div>
             <h3 id="modalTitle"></h3>
             <p id="modalDesc"></p>
             <ul class="modal-features" id="modalFeatures"></ul>
             <div class="modal-price" id="modalPrice"></div>
             <div class="modal-buttons">
-                <button id="addToCart">Добавить в корзину</button>
-                <button id="closeModal">Назад</button>
+                <button id="addToCartBtn">Добавить в корзину</button>
+                <button id="addToFavoritesBtn">В избранное</button>
+                <button id="closeModalBtn2">Назад</button>
             </div>
+        </div>
+    </div>
+
+    <!-- AUTH MODAL -->
+    <div class="modal" id="authModal">
+        <button class="close-modal" id="closeAuthModal">×</button>
+        <div class="modal-content">
+            <h3>Вход в систему</h3>
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-form="login">Вход</button>
+                <button class="auth-tab" data-form="register">Регистрация</button>
+            </div>
+            
+            <div class="auth-form active" id="loginForm">
+                <input type="email" placeholder="Email" id="loginEmail">
+                <input type="password" placeholder="Пароль" id="loginPassword">
+                <button id="loginBtn">Войти</button>
+            </div>
+            
+            <div class="auth-form" id="registerForm">
+                <input type="text" placeholder="Имя" id="registerName">
+                <input type="email" placeholder="Email" id="registerEmail">
+                <input type="password" placeholder="Пароль" id="registerPassword">
+                <input type="password" placeholder="Повторите пароль" id="registerPassword2">
+                <button id="registerBtn">Зарегистрироваться</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- USER PROFILE MODAL -->
+    <div class="modal" id="profileModal">
+        <button class="close-modal" id="closeProfileModal">×</button>
+        <div class="modal-content">
+            <div class="profile-header">
+                <div class="profile-avatar" id="profileAvatar">U</div>
+                <div class="profile-info">
+                    <h4 id="profileUserName">Гость</h4>
+                    <p id="profileUserEmail">Войдите в аккаунт</p>
+                </div>
+            </div>
+            
+            <div class="profile-stats">
+                <div class="stat-item">
+                    <span class="stat-value" id="modalTotalOrders">0</span>
+                    <span class="stat-label">Заказов</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="modalTotalSpent">0 ₽</span>
+                    <span class="stat-label">Потрачено</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="modalFavorites">0</span>
+                    <span class="stat-label">Избранное</span>
+                </div>
+            </div>
+            
+            <div class="profile-orders" id="modalOrdersList">
+                <div class="empty-orders">Нет последних заказов</div>
+            </div>
+            
+            <button class="logout-btn" id="modalLogoutBtn">Выйти из аккаунта</button>
         </div>
     </div>
 
@@ -726,6 +1473,7 @@
             </div>
             <input type="text" placeholder="Ваше имя" id="checkoutName">
             <input type="email" placeholder="Email" id="checkoutEmail">
+            <input type="tel" placeholder="Телефон" id="checkoutPhone">
             <input type="text" placeholder="Адрес доставки" id="checkoutAddress">
             <div class="checkout-buttons">
                 <button id="confirmOrder">Подтвердить заказ</button>
@@ -735,219 +1483,762 @@
     </div>
 
     <script>
-        /* ===== LOGO ASSEMBLY ===== */
-        const text = "OBRIXION";
-        const logo = document.getElementById("logo");
+        // ===== DATABASE (LocalStorage) =====
+        const Database = {
+            // Инициализация базы данных
+            init() {
+                if (!localStorage.getItem('obrixion_users')) {
+                    localStorage.setItem('obrixion_users', JSON.stringify({}));
+                }
+                if (!localStorage.getItem('obrixion_products')) {
+                    this.initProducts();
+                }
+                if (!localStorage.getItem('obrixion_orders')) {
+                    localStorage.setItem('obrixion_orders', JSON.stringify({}));
+                }
+            },
 
-        [...text].forEach(letter => {
-            const span = document.createElement("span");
-            span.textContent = letter;
-            span.style.setProperty("--randx", Math.random());
-            span.style.setProperty("--randy", Math.random());
-            span.style.setProperty("--randz", Math.random());
-            logo.appendChild(span);
+            // Инициализация товаров
+            initProducts() {
+                const products = {
+                    '1': {
+                        id: '1',
+                        name: 'OBRIXION CORE',
+                        description: 'Минималистичный силуэт. Контроль. Влияние.',
+                        price: '₽ 12 900',
+                        features: 'Материал: Премиум хлопок|Посадка: Oversize|Цвет: Graphite Black|Производство: Limited Edition',
+                        image: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                        tag: 'NEW'
+                    },
+                    '2': {
+                        id: '2',
+                        name: 'NEURO LINE',
+                        description: 'Одежда как продолжение психологии.',
+                        price: '₽ 14 500',
+                        features: 'Материал: Tech fabric|Эффект: Нейро-линии|Форма: Slim fit|Коллекция: Neuro Series',
+                        image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                        tag: 'TECH'
+                    },
+                    '3': {
+                        id: '3',
+                        name: 'VOID FORM',
+                        description: 'Чистая форма. Эмоциональный вакуум.',
+                        price: '₽ 11 800',
+                        features: 'Материал: Soft shell|Стиль: Minimal void|Посадка: Relaxed|Ограниченный тираж: 100 шт',
+                        image: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                        tag: 'LIMITED'
+                    },
+                    '4': {
+                        id: '4',
+                        name: 'QUANTUM SHIFT',
+                        description: 'Квантовый скачок в стиле.',
+                        price: '₽ 16 200',
+                        features: 'Материал: Silver thread|Защита: Waterproof|Особенность: Smart temperature|Производство: Japan',
+                        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBH2e6qxCA-oU5eYG6QPYVGdCXmEWyX6WYpg&s',
+                        tag: 'PRO'
+                    },
+                    '5': {
+                        id: '5',
+                        name: 'CARBON EDGE',
+                        description: 'Прочность углерода в стиле.',
+                        price: '₽ 15 400',
+                        features: 'Материал: Carbon fiber|Вес: 280г|Особенность: Anti-static|Коллекция: Future Series',
+                        image: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                        tag: 'CARBON'
+                    },
+                    '6': {
+                        id: '6',
+                        name: 'LUNAR PHASE',
+                        description: 'Стиль под светом луны.',
+                        price: '₽ 13 700',
+                        features: 'Материал: Moon fabric|Свет: Glow in dark|Эффект: Gradient|Ограничение: 50 шт',
+                        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTR0idA7ukC96XgSntg383FRAkhJCVva9hYQ&s',
+                        tag: 'GLOW'
+                    }
+                };
+                localStorage.setItem('obrixion_products', JSON.stringify(products));
+            },
+
+            // Пользователи
+            users: {
+                get() {
+                    return JSON.parse(localStorage.getItem('obrixion_users') || '{}');
+                },
+                set(users) {
+                    localStorage.setItem('obrixion_users', JSON.stringify(users));
+                },
+                create(user) {
+                    const users = this.get();
+                    users[user.email] = user;
+                    this.set(users);
+                    return user;
+                },
+                find(email) {
+                    const users = this.get();
+                    return users[email];
+                }
+            },
+
+            // Товары
+            products: {
+                get() {
+                    return JSON.parse(localStorage.getItem('obrixion_products') || '{}');
+                },
+                find(id) {
+                    const products = this.get();
+                    return products[id];
+                }
+            },
+
+            // Заказы
+            orders: {
+                get() {
+                    return JSON.parse(localStorage.getItem('obrixion_orders') || '{}');
+                },
+                set(orders) {
+                    localStorage.setItem('obrixion_orders', JSON.stringify(orders));
+                },
+                create(order) {
+                    const orders = this.get();
+                    if (!orders[order.userEmail]) {
+                        orders[order.userEmail] = [];
+                    }
+                    orders[order.userEmail].push(order);
+                    this.set(orders);
+                    return order;
+                },
+                findByUser(email) {
+                    const orders = this.get();
+                    return orders[email] || [];
+                }
+            },
+
+            // Корзина пользователя
+            cart: {
+                get(email) {
+                    const key = `obrixion_cart_${email}`;
+                    return JSON.parse(localStorage.getItem(key) || '[]');
+                },
+                set(email, cart) {
+                    const key = `obrixion_cart_${email}`;
+                    localStorage.setItem(key, JSON.stringify(cart));
+                },
+                clear(email) {
+                    const key = `obrixion_cart_${email}`;
+                    localStorage.removeItem(key);
+                }
+            },
+
+            // Избранное пользователя
+            favorites: {
+                get(email) {
+                    const key = `obrixion_favorites_${email}`;
+                    return JSON.parse(localStorage.getItem(key) || '[]');
+                },
+                set(email, favorites) {
+                    const key = `obrixion_favorites_${email}`;
+                    localStorage.setItem(key, JSON.stringify(favorites));
+                },
+                add(email, productId) {
+                    const favorites = this.get(email);
+                    if (!favorites.includes(productId)) {
+                        favorites.push(productId);
+                        this.set(email, favorites);
+                    }
+                },
+                remove(email, productId) {
+                    const favorites = this.get(email);
+                    const index = favorites.indexOf(productId);
+                    if (index > -1) {
+                        favorites.splice(index, 1);
+                        this.set(email, favorites);
+                    }
+                }
+            }
+        };
+
+        // ===== STATE MANAGEMENT =====
+        let currentUser = null;
+        let currentProduct = null;
+        let cart = [];
+        let favorites = [];
+
+        // ===== INITIALIZATION =====
+        document.addEventListener('DOMContentLoaded', () => {
+            Database.init();
+            initApp();
         });
 
-        setTimeout(() => {
-            logo.classList.add("floating");
-        }, 2600);
+        function initApp() {
+            // Check if user is logged in
+            const savedUser = localStorage.getItem('obrixion_current_user');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                updateUIForUser();
+            }
 
-        /* ===== ABSTRACT SHAPES ===== */
-        const sceneElement = document.getElementById("scene");
-        const shapes = [];
-
-        for (let i = 0; i < 14; i++) {
-            const s = document.createElement("div");
-            s.className = "shape";
-            s.style.top = Math.random() * 100 + "%";
-            s.style.left = Math.random() * 100 + "%";
-            s.dataset.depth = Math.random() * 800;
-            sceneElement.appendChild(s);
-            shapes.push(s);
+            // Initialize all components
+            initLogo();
+            initShapes();
+            initNavigation();
+            initCatalog();
+            initModals();
+            initAuth();
+            initPersonalCabinet();
+            initCart();
         }
 
-        /* ===== MOUSE MOVE ===== */
-        document.addEventListener("mousemove", e => {
-            const x = (e.clientX / window.innerWidth - 0.5) * 40;
-            const y = (e.clientY / window.innerHeight - 0.5) * 40;
+        // ===== LOGO AND SHAPES =====
+        function initLogo() {
+            const text = "OBRIXION";
+            const logo = document.getElementById("logo");
 
-            shapes.forEach(s => {
-                s.style.transform =
-                    `translateZ(${s.dataset.depth}px)
-   rotateX(${y}deg)
-   rotateY(${x}deg)`;
+            [...text].forEach(letter => {
+                const span = document.createElement("span");
+                span.textContent = letter;
+                span.style.setProperty("--randx", Math.random());
+                span.style.setProperty("--randy", Math.random());
+                span.style.setProperty("--randz", Math.random());
+                logo.appendChild(span);
             });
-        }, { passive: true });
 
-        /* ===== SMOOTH SCROLL EFFECT ===== */
-        let currentScroll = 0;
-        let targetScroll = 0;
+            setTimeout(() => {
+                logo.classList.add("floating");
+            }, 2600);
+        }
 
-        window.addEventListener("scroll", () => {
-            targetScroll = window.scrollY;
-        }, { passive: true });
+        function initShapes() {
+            const sceneElement = document.getElementById("scene");
+            const shapes = [];
 
-        function smoothScrollAnimation() {
-            const diff = targetScroll - currentScroll;
-            if (Math.abs(diff) > 0.5) {
-                currentScroll += diff * 0.1;
+            for (let i = 0; i < 14; i++) {
+                const s = document.createElement("div");
+                s.className = "shape";
+                s.style.top = Math.random() * 100 + "%";
+                s.style.left = Math.random() * 100 + "%";
+                s.dataset.depth = Math.random() * 800;
+                sceneElement.appendChild(s);
+                shapes.push(s);
+            }
+
+            document.addEventListener("mousemove", e => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 40;
+                const y = (e.clientY / window.innerHeight - 0.5) * 40;
 
                 shapes.forEach(s => {
-                    const depth = s.dataset.depth;
-                    const slowRotate = currentScroll * 0.05;
                     s.style.transform =
-                        `translateZ(${depth}px)
-       rotateZ(${slowRotate}deg)`;
+                        `translateZ(${s.dataset.depth}px)
+       rotateX(${y}deg)
+       rotateY(${x}deg)`;
                 });
-            }
-
-            requestAnimationFrame(smoothScrollAnimation);
+            }, { passive: true });
         }
 
-        smoothScrollAnimation();
+        // ===== NAVIGATION =====
+        function initNavigation() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const personalLink = document.querySelector('.personal-link');
+            const userAvatar = document.getElementById('userAvatar');
 
-        /* ===== SECTION REVEAL ===== */
-        const reveals = document.querySelectorAll(".reveal");
-
-        const observer = new IntersectionObserver(
-            entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("active");
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = link.getAttribute('href');
+                    
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                    
+                    if (target === '#personal') {
+                        showPersonalCabinet();
+                    } else {
+                        showHomePage();
                     }
                 });
-            },
-            { threshold: 0.2 }
-        );
-
-        reveals.forEach(r => observer.observe(r));
-
-        /* ===== SHOPPING CART LOGIC ===== */
-        let cart = [];
-        let cartCount = 0;
-
-        const modalEl = document.getElementById("modal");
-        const modalTitle = document.getElementById("modalTitle");
-        const modalDesc = document.getElementById("modalDesc");
-        const modalPrice = document.getElementById("modalPrice");
-        const modalFeatures = document.getElementById("modalFeatures");
-        const addToCartBtn = document.getElementById("addToCart");
-        const closeModalBtn = document.getElementById("closeModal");
-        const cartEl = document.getElementById("cart");
-        const cartCountEl = document.getElementById("cartCount");
-        const checkoutEl = document.getElementById("checkout");
-        const checkoutItems = document.getElementById("checkoutItems");
-        const confirmOrderBtn = document.getElementById("confirmOrder");
-        const closeCheckoutBtn = document.getElementById("closeCheckout");
-        const clearCartBtn = document.getElementById("clearCart");
-        const checkoutName = document.getElementById("checkoutName");
-        const checkoutEmail = document.getElementById("checkoutEmail");
-        const checkoutAddress = document.getElementById("checkoutAddress");
-
-        let currentProduct = null;
-
-        /* ===== CARD CLICK HANDLER ===== */
-        document.querySelectorAll(".card").forEach(card => {
-            card.addEventListener("click", () => {
-                const title = card.querySelector("h3").textContent;
-                const desc = card.querySelector("p").textContent;
-                const price = card.querySelector(".price").textContent;
-                const features = card.dataset.features;
-
-                currentProduct = {
-                    title,
-                    desc,
-                    price,
-                    features
-                };
-
-                modalTitle.textContent = title;
-                modalDesc.textContent = desc;
-                modalPrice.textContent = price;
-
-                modalFeatures.innerHTML = "";
-                features.split("|").forEach(feature => {
-                    const li = document.createElement("li");
-                    li.textContent = feature;
-                    modalFeatures.appendChild(li);
-                });
-
-                modalEl.classList.add("active");
-                document.body.style.overflow = "hidden";
             });
-        });
 
-        /* ===== ADD TO CART ===== */
-        addToCartBtn.addEventListener("click", () => {
-            if (currentProduct) {
-                cart.push(currentProduct);
-                cartCount++;
-                cartCountEl.textContent = cartCount;
-
-                // Показать уведомление
-                showNotification(`${currentProduct.title} добавлен в корзину!`);
-
-                closeModal();
-            }
-        });
-
-        /* ===== CLOSE MODAL ===== */
-        closeModalBtn.addEventListener("click", closeModal);
-
-        modalEl.addEventListener("click", (e) => {
-            if (e.target === modalEl) {
-                closeModal();
-            }
-        });
-
-        function closeModal() {
-            modalEl.classList.remove("active");
-            document.body.style.overflow = "auto";
-            currentProduct = null;
+            userAvatar.addEventListener('click', () => {
+                if (currentUser) {
+                    showProfileModal();
+                } else {
+                    showAuthModal();
+                }
+            });
         }
 
-        /* ===== CART CLICK ===== */
-        cartEl.addEventListener("click", () => {
-            updateCheckoutItems();
-            checkoutEl.classList.add("active");
-            document.body.style.overflow = "hidden";
-        });
-
-        /* ===== CLOSE CHECKOUT ===== */
-        closeCheckoutBtn.addEventListener("click", () => {
-            checkoutEl.classList.remove("active");
-            document.body.style.overflow = "auto";
-        });
-
-        checkoutEl.addEventListener("click", (e) => {
-            if (e.target === checkoutEl) {
-                checkoutEl.classList.remove("active");
-                document.body.style.overflow = "auto";
+        function showPersonalCabinet() {
+            document.getElementById('home').style.display = 'none';
+            document.getElementById('personal').style.display = 'block';
+            if (currentUser) {
+                loadPersonalCabinet();
+            } else {
+                showAuthModal();
             }
-        });
+        }
 
-        /* ===== UPDATE CHECKOUT ITEMS ===== */
+        function showHomePage() {
+            document.getElementById('home').style.display = 'block';
+            document.getElementById('personal').style.display = 'none';
+        }
+
+        // ===== CATALOG =====
+        function initCatalog() {
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const productId = card.dataset.id;
+                    const product = Database.products.find(productId);
+                    
+                    if (product) {
+                        currentProduct = product;
+                        showProductModal(product);
+                    }
+                });
+            });
+        }
+
+        // ===== MODALS =====
+        function initModals() {
+            // Product modal
+            const modal = document.getElementById('modal');
+            const closeModalBtns = document.querySelectorAll('#closeModalBtn, #closeModalBtn2');
+            
+            closeModalBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Add to cart button
+            document.getElementById('addToCartBtn').addEventListener('click', () => {
+                if (!currentUser) {
+                    showNotification('Войдите в аккаунт чтобы добавить товар в корзину', true);
+                    showAuthModal();
+                    return;
+                }
+
+                if (currentProduct) {
+                    cart.push(currentProduct);
+                    Database.cart.set(currentUser.email, cart);
+                    updateCartCount();
+                    showNotification(`${currentProduct.name} добавлен в корзину!`);
+                    
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Add to favorites button
+            document.getElementById('addToFavoritesBtn').addEventListener('click', () => {
+                if (!currentUser) {
+                    showNotification('Войдите в аккаунт чтобы добавить товар в избранное', true);
+                    showAuthModal();
+                    return;
+                }
+
+                if (currentProduct) {
+                    Database.favorites.add(currentUser.email, currentProduct.id);
+                    favorites = Database.favorites.get(currentUser.email);
+                    showNotification(`${currentProduct.name} добавлен в избранное!`);
+                }
+            });
+        }
+
+        function showProductModal(product) {
+            const modal = document.getElementById('modal');
+            document.getElementById('modalTitle').textContent = product.name;
+            document.getElementById('modalDesc').textContent = product.description;
+            document.getElementById('modalPrice').textContent = product.price;
+            document.getElementById('modalImageSrc').src = product.image;
+            document.getElementById('modalImageSrc').alt = product.name;
+
+            const featuresList = document.getElementById('modalFeatures');
+            featuresList.innerHTML = '';
+            product.features.split('|').forEach(feature => {
+                const li = document.createElement('li');
+                li.textContent = feature;
+                featuresList.appendChild(li);
+            });
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // ===== AUTHENTICATION =====
+        function initAuth() {
+            // Auth tabs
+            document.querySelectorAll('.auth-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const form = tab.dataset.form;
+                    
+                    document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+                    document.getElementById(`${form}Form`).classList.add('active');
+                });
+            });
+
+            // Login
+            document.getElementById('loginBtn').addEventListener('click', () => {
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                
+                if (!email || !password) {
+                    showNotification('Заполните все поля', true);
+                    return;
+                }
+
+                const user = Database.users.find(email);
+                if (!user || user.password !== password) {
+                    showNotification('Неверный email или пароль', true);
+                    return;
+                }
+
+                login(user);
+            });
+
+            // Register
+            document.getElementById('registerBtn').addEventListener('click', () => {
+                const name = document.getElementById('registerName').value;
+                const email = document.getElementById('registerEmail').value;
+                const password = document.getElementById('registerPassword').value;
+                const password2 = document.getElementById('registerPassword2').value;
+                
+                if (!name || !email || !password || !password2) {
+                    showNotification('Заполните все поля', true);
+                    return;
+                }
+
+                if (password !== password2) {
+                    showNotification('Пароли не совпадают', true);
+                    return;
+                }
+
+                if (Database.users.find(email)) {
+                    showNotification('Пользователь с таким email уже существует', true);
+                    return;
+                }
+
+                const user = {
+                    name,
+                    email,
+                    password,
+                    createdAt: new Date().toISOString()
+                };
+
+                Database.users.create(user);
+                login(user);
+            });
+
+            // Close auth modal
+            document.getElementById('closeAuthModal').addEventListener('click', () => {
+                document.getElementById('authModal').classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        }
+
+        function showAuthModal() {
+            document.getElementById('authModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function login(user) {
+            currentUser = user;
+            localStorage.setItem('obrixion_current_user', JSON.stringify(user));
+            
+            // Load user data
+            cart = Database.cart.get(user.email);
+            favorites = Database.favorites.get(user.email);
+            
+            updateUIForUser();
+            showNotification(`Добро пожаловать, ${user.name}!`);
+            
+            document.getElementById('authModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('obrixion_current_user');
+            cart = [];
+            favorites = [];
+            
+            updateUIForUser();
+            showNotification('Вы вышли из аккаунта');
+            
+            if (window.location.hash === '#personal') {
+                showHomePage();
+            }
+        }
+
+        // ===== PERSONAL CABINET =====
+        function initPersonalCabinet() {
+            // Menu tabs
+            document.querySelectorAll('.menu-item').forEach(item => {
+                if (item.id !== 'logoutBtn') {
+                    item.addEventListener('click', () => {
+                        const tab = item.dataset.tab;
+                        
+                        document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+                        item.classList.add('active');
+                        
+                        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+                        document.getElementById(`${tab}Tab`).classList.add('active');
+                    });
+                }
+            });
+
+            // Logout
+            document.getElementById('logoutBtn').addEventListener('click', logout);
+            document.getElementById('modalLogoutBtn').addEventListener('click', logout);
+
+            // Save profile
+            document.getElementById('saveProfile').addEventListener('click', () => {
+                if (!currentUser) return;
+
+                currentUser.name = document.getElementById('profileName').value || currentUser.name;
+                currentUser.email = document.getElementById('profileEmail').value || currentUser.email;
+                currentUser.phone = document.getElementById('profilePhone').value;
+                currentUser.address = document.getElementById('profileAddress').value;
+
+                // Update in database
+                const users = Database.users.get();
+                users[currentUser.email] = currentUser;
+                Database.users.set(users);
+                localStorage.setItem('obrixion_current_user', JSON.stringify(currentUser));
+
+                showNotification('Профиль обновлен!');
+                updateUIForUser();
+            });
+        }
+
+        function loadPersonalCabinet() {
+            if (!currentUser) return;
+
+            // Load profile
+            document.getElementById('profileName').value = currentUser.name || '';
+            document.getElementById('profileEmail').value = currentUser.email || '';
+            document.getElementById('profilePhone').value = currentUser.phone || '';
+            document.getElementById('profileAddress').value = currentUser.address || '';
+
+            // Load stats
+            const orders = Database.orders.findByUser(currentUser.email);
+            const totalSpent = orders.reduce((sum, order) => sum + order.total, 0);
+            
+            document.getElementById('totalOrders').textContent = orders.length;
+            document.getElementById('totalSpent').textContent = `${totalSpent} ₽`;
+            document.getElementById('memberSince').textContent = new Date(currentUser.createdAt).getFullYear();
+
+            // Load orders
+            const ordersList = document.getElementById('ordersList');
+            if (orders.length === 0) {
+                ordersList.innerHTML = '<div class="empty-orders">У вас пока нет заказов</div>';
+            } else {
+                ordersList.innerHTML = '';
+                orders.forEach(order => {
+                    const orderEl = document.createElement('div');
+                    orderEl.className = 'order-card';
+                    orderEl.innerHTML = `
+                        <div class="order-header">
+                            <div>
+                                <span class="order-id">Заказ #${order.id}</span>
+                                <div class="order-date">${new Date(order.date).toLocaleDateString('ru-RU')}</div>
+                            </div>
+                            <span class="order-status ${order.status}">${getStatusText(order.status)}</span>
+                        </div>
+                        <div class="order-total">Итого: ${order.total} ₽</div>
+                        <div class="order-products">
+                            ${order.items.map(item => `
+                                <div class="order-product">
+                                    <img src="${item.image}" alt="${item.name}">
+                                    <div>
+                                        <div>${item.name}</div>
+                                        <div>${item.price}</div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    ordersList.appendChild(orderEl);
+                });
+            }
+
+            // Load favorites
+            loadFavorites();
+        }
+
+        function loadFavorites() {
+            const favoritesList = document.getElementById('favoritesList');
+            const products = Database.products.get();
+            
+            if (favorites.length === 0) {
+                favoritesList.innerHTML = '<div class="empty-favorites">В избранном пока пусто</div>';
+                return;
+            }
+
+            favoritesList.innerHTML = '';
+            favorites.forEach(productId => {
+                const product = products[productId];
+                if (product) {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'card';
+                    productCard.innerHTML = `
+                        <div class="card-image">
+                            <img src="${product.image}" alt="${product.name}" loading="lazy">
+                            <div class="card-image-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <div>
+                                <h3>${product.name}</h3>
+                                <p>${product.description}</p>
+                            </div>
+                            <div class="price">${product.price}</div>
+                        </div>
+                        <div class="product-tag">${product.tag}</div>
+                    `;
+                    favoritesList.appendChild(productCard);
+                }
+            });
+        }
+
+        // ===== CART =====
+        function initCart() {
+            const cartEl = document.getElementById('cart');
+            const checkout = document.getElementById('checkout');
+            const closeCheckout = document.getElementById('closeCheckout');
+            const confirmOrder = document.getElementById('confirmOrder');
+            const clearCart = document.getElementById('clearCart');
+
+            cartEl.addEventListener('click', () => {
+                if (!currentUser) {
+                    showNotification('Войдите в аккаунт чтобы просмотреть корзину', true);
+                    showAuthModal();
+                    return;
+                }
+
+                updateCheckoutItems();
+                checkout.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+
+            closeCheckout.addEventListener('click', () => {
+                checkout.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+
+            checkout.addEventListener('click', (e) => {
+                if (e.target === checkout) {
+                    checkout.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            confirmOrder.addEventListener('click', () => {
+                if (!currentUser) {
+                    showNotification('Войдите в аккаунт чтобы оформить заказ', true);
+                    showAuthModal();
+                    return;
+                }
+
+                if (cart.length === 0) {
+                    showNotification('Корзина пуста', true);
+                    return;
+                }
+
+                const name = document.getElementById('checkoutName').value || currentUser.name;
+                const email = document.getElementById('checkoutEmail').value || currentUser.email;
+                const phone = document.getElementById('checkoutPhone').value;
+                const address = document.getElementById('checkoutAddress').value;
+
+                if (!name || !email || !phone || !address) {
+                    showNotification('Заполните все поля', true);
+                    return;
+                }
+
+                // Create order
+                const order = {
+                    id: Date.now().toString(),
+                    date: new Date().toISOString(),
+                    userEmail: currentUser.email,
+                    userName: name,
+                    userPhone: phone,
+                    userAddress: address,
+                    items: [...cart],
+                    total: calculateCartTotal(),
+                    status: 'pending' // pending, processing, delivered
+                };
+
+                Database.orders.create(order);
+                Database.cart.clear(currentUser.email);
+                cart = [];
+                updateCartCount();
+                updateUIForUser();
+
+                showNotification(`Заказ оформлен! Номер заказа: ${order.id}. Мы свяжемся с вами в ближайшее время.`);
+                
+                checkout.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                
+                // Clear form
+                document.getElementById('checkoutName').value = '';
+                document.getElementById('checkoutEmail').value = '';
+                document.getElementById('checkoutPhone').value = '';
+                document.getElementById('checkoutAddress').value = '';
+            });
+
+            clearCart.addEventListener('click', () => {
+                if (cart.length > 0) {
+                    if (confirm('Очистить корзину?')) {
+                        Database.cart.clear(currentUser.email);
+                        cart = [];
+                        updateCartCount();
+                        updateCheckoutItems();
+                        showNotification('Корзина очищена');
+                    }
+                }
+            });
+        }
+
+        function updateCartCount() {
+            document.getElementById('cartCount').textContent = cart.length;
+        }
+
+        function calculateCartTotal() {
+            return cart.reduce((total, item) => {
+                const price = parseInt(item.price.replace(/[^\d]/g, ''));
+                return total + price;
+            }, 0);
+        }
+
         function updateCheckoutItems() {
-            checkoutItems.innerHTML = "";
-
+            const checkoutItems = document.getElementById('checkoutItems');
+            checkoutItems.innerHTML = '';
+            
             if (cart.length === 0) {
                 checkoutItems.innerHTML = '<div class="empty-cart">Корзина пуста</div>';
                 return;
             }
 
             cart.forEach((item, index) => {
-                const itemEl = document.createElement("div");
-                itemEl.className = "checkout-item";
+                const itemEl = document.createElement('div');
+                itemEl.className = 'checkout-item';
                 itemEl.innerHTML = `
                     <div>
-                        <strong>${item.title}</strong>
+                        <strong>${item.name}</strong>
                         <div style="font-size: 0.9rem; opacity: 0.7;">${item.price}</div>
                     </div>
                     <button class="remove-item" data-index="${index}" style="
                         background: transparent;
                         border: 1px solid var(--main);
                         color: var(--main);
-                        border-radius: 6px;
+                        border-radius: 3px;
                         padding: 4px 10px;
                         cursor: pointer;
                         font-size: 0.9rem;
@@ -956,138 +2247,164 @@
                 checkoutItems.appendChild(itemEl);
             });
 
-            // Добавляем обработчики для кнопок удаления
-            document.querySelectorAll(".remove-item").forEach(btn => {
-                btn.addEventListener("click", (e) => {
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', (e) => {
                     const index = parseInt(e.target.dataset.index);
                     cart.splice(index, 1);
-                    cartCount--;
-                    cartCountEl.textContent = cartCount;
+                    Database.cart.set(currentUser.email, cart);
+                    updateCartCount();
                     updateCheckoutItems();
                 });
             });
         }
 
-        /* ===== CLEAR CART ===== */
-        clearCartBtn.addEventListener("click", () => {
-            if (cart.length > 0) {
-                if (confirm("Очистить корзину?")) {
-                    cart = [];
-                    cartCount = 0;
-                    cartCountEl.textContent = 0;
-                    updateCheckoutItems();
-                    showNotification("Корзина очищена");
+        // ===== PROFILE MODAL =====
+        function showProfileModal() {
+            if (!currentUser) return;
+
+            const modal = document.getElementById('profileModal');
+            const orders = Database.orders.findByUser(currentUser.email);
+            const totalSpent = orders.reduce((sum, order) => sum + order.total, 0);
+
+            // Update modal content
+            document.getElementById('profileAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
+            document.getElementById('profileUserName').textContent = currentUser.name;
+            document.getElementById('profileUserEmail').textContent = currentUser.email;
+            document.getElementById('modalTotalOrders').textContent = orders.length;
+            document.getElementById('modalTotalSpent').textContent = `${totalSpent} ₽`;
+            document.getElementById('modalFavorites').textContent = favorites.length;
+
+            // Update orders list in modal
+            const ordersList = document.getElementById('modalOrdersList');
+            if (orders.length === 0) {
+                ordersList.innerHTML = '<div class="empty-orders">Нет последних заказов</div>';
+            } else {
+                ordersList.innerHTML = '';
+                const recentOrders = orders.slice(-3).reverse();
+                recentOrders.forEach(order => {
+                    const orderEl = document.createElement('div');
+                    orderEl.className = 'order-item';
+                    orderEl.innerHTML = `
+                        <div class="order-header">
+                            <span class="order-id">Заказ #${order.id}</span>
+                            <span class="order-date">${new Date(order.date).toLocaleDateString('ru-RU')}</span>
+                        </div>
+                        <div>${order.items.length} товаров</div>
+                        <div class="order-total">${order.total} ₽</div>
+                        <span class="order-status ${order.status}">${getStatusText(order.status)}</span>
+                    `;
+                    ordersList.appendChild(orderEl);
+                });
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // Close modal button
+            document.getElementById('closeProfileModal').addEventListener('click', () => {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
                 }
+            });
+        }
+
+        // ===== UI UPDATES =====
+        function updateUIForUser() {
+            const userAvatar = document.getElementById('userAvatar');
+            
+            if (currentUser) {
+                userAvatar.textContent = currentUser.name.charAt(0).toUpperCase();
+                userAvatar.style.background = 'var(--main)';
+                
+                // Load user data
+                cart = Database.cart.get(currentUser.email);
+                favorites = Database.favorites.get(currentUser.email);
+                updateCartCount();
+                
+                if (window.location.hash === '#personal') {
+                    loadPersonalCabinet();
+                }
+            } else {
+                userAvatar.textContent = '?';
+                userAvatar.style.background = 'rgba(139, 92, 246, 0.3)';
+                cart = [];
+                updateCartCount();
             }
-        });
+        }
 
-        /* ===== CONFIRM ORDER ===== */
-        confirmOrderBtn.addEventListener("click", () => {
-            if (cart.length === 0) {
-                showNotification("Корзина пуста", true);
-                return;
-            }
+        // ===== UTILITY FUNCTIONS =====
+        function getStatusText(status) {
+            const statusMap = {
+                'pending': 'Ожидает обработки',
+                'processing': 'В обработке',
+                'delivered': 'Доставлен'
+            };
+            return statusMap[status] || status;
+        }
 
-            if (!checkoutName.value || !checkoutEmail.value || !checkoutAddress.value) {
-                showNotification("Заполните все поля", true);
-                return;
-            }
-
-            // Имитация успешного заказа
-            const total = cart.reduce((sum, item) => {
-                const price = parseInt(item.price.replace(/[^\d]/g, ''));
-                return sum + price;
-            }, 0);
-
-            showNotification(`Заказ оформлен! Сумма: ${total}₽. Мы свяжемся с вами в ближайшее время.`);
-
-            // Очищаем форму
-            cart = [];
-            cartCount = 0;
-            cartCountEl.textContent = 0;
-            checkoutName.value = "";
-            checkoutEmail.value = "";
-            checkoutAddress.value = "";
-            updateCheckoutItems();
-
-            setTimeout(() => {
-                checkoutEl.classList.remove("active");
-                document.body.style.overflow = "auto";
-            }, 2000);
-        });
-
-        /* ===== NOTIFICATION FUNCTION ===== */
         function showNotification(message, isError = false) {
-            // Удаляем старые уведомления
-            const oldNotifications = document.querySelectorAll('.notification');
-            oldNotifications.forEach(n => n.remove());
-
             const notification = document.createElement('div');
             notification.className = 'notification';
             notification.textContent = message;
-            notification.style.cssText = `
-                position: fixed;
-                top: 30px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: ${isError ? 'rgba(255, 50, 50, 0.9)' : 'rgba(139, 92, 246, 0.9)'};
-                color: white;
-                padding: 15px 30px;
-                border-radius: 12px;
-                backdrop-filter: blur(10px);
-                z-index: 9999;
-                animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-                font-weight: 500;
-            `;
-
+            notification.style.background = isError ? 'var(--error)' : 'var(--main)';
+            
             document.body.appendChild(notification);
-
-            // Удаляем через 3 секунды
+            
             setTimeout(() => {
-                if (notification.parentNode) {
-                    notification.parentNode.removeChild(notification);
-                }
-            }, 3000);
+                notification.remove();
+            }, 5000);
         }
 
-        // Добавляем стили для анимации уведомлений
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from {
-                    transform: translateX(-50%) translateY(-20px);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateX(-50%) translateY(0);
-                    opacity: 1;
-                }
-            }
-            
-            @keyframes fadeOut {
-                from {
-                    opacity: 1;
-                }
-                to {
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
+        // ===== SMOOTH SCROLL AND ANIMATIONS =====
+        let currentScroll = 0;
+        let targetScroll = 0;
 
-        /* ===== ENTER KEY FOR MODAL ===== */
+        window.addEventListener('scroll', () => {
+            targetScroll = window.scrollY;
+        }, { passive: true });
+
+        function smoothScrollAnimation() {
+            const diff = targetScroll - currentScroll;
+            if (Math.abs(diff) > 0.5) {
+                currentScroll += diff * 0.1;
+            }
+            requestAnimationFrame(smoothScrollAnimation);
+        }
+
+        smoothScrollAnimation();
+
+        // Section reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver(
+            entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            },
+            { threshold: 0.2 }
+        );
+        reveals.forEach(r => observer.observe(r));
+
+        // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
-                if (modalEl.classList.contains('active')) {
-                    closeModal();
-                }
-                if (checkoutEl.classList.contains('active')) {
-                    checkoutEl.classList.remove('active');
-                    document.body.style.overflow = "auto";
-                }
+                const modals = document.querySelectorAll('.modal.active');
+                modals.forEach(modal => modal.classList.remove('active'));
+                document.body.style.overflow = 'auto';
             }
         });
+
+        // Initialize cart count
+        updateCartCount();
     </script>
 
 </body>
